@@ -20,14 +20,7 @@ TransLogiCo démarre avec trois types de transporteurs internes : **Standard**, 
 
 Le système doit permettre de définir dynamiquement le calcul des frais de chaque transporteur en utilisant des stratégies différentes.
 
-### Objectifs
-
-1. **Interface Transporteur** : Créer une interface `Transporteur` avec une méthode pour définir dynamiquement la stratégie de calcul utilisée.
-2. **Stratégie de Calcul** : Créer une interface `CalculerFrais` pour définir les stratégies de calcul, ainsi que trois classes concrètes (`CStandard`, `CExpress`, `CEco`) correspondant aux méthodes de calcul de chaque type de transporteur.
-3. **Factory** : Développer une classe `TransporteurFactory` qui génère les instances de transporteurs en fonction du type (Standard, Express, Eco).
-4. **Calculateur de Frais** : Ajouter à `Transporteur` la possibilité de changer la stratégie de calcul à l’aide de `CalculNormal` et `CalculPromo` (qui applique une réduction de 10%).
-
-Placez cette première version dans un dossier nommé **Partie1**.
+Placez cette première version dans une branche nommée **Partie1**.
 
 ---
 
