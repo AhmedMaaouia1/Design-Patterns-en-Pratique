@@ -30,13 +30,7 @@ Placez cette première version dans une branche nommée **Partie1**.
 
 L’équipe commerciale de TransLogiCo conclut qu’il serait stratégique d’offrir des options de livraison avec des transporteurs externes. L’entreprise souhaite intégrer un transporteur externe nommé **ExterShip**, qui possède une méthode `getTarif(double poids, double distance)` pour calculer les frais.
 
-### Objectifs
-
-1. **Adaptateur** : Utiliser un pattern Adaptateur pour intégrer ExterShip sans modifier la structure existante. Créer une classe `AdaptateurTransporteurExterne` qui implémente `CalculerFrais` et redirige les appels vers la méthode `getTarif()` d'ExterShip.
-2. **Mise à jour de la Factory** : Modifier `TransporteurFactory` pour inclure ce nouveau transporteur externe via l’adaptateur.
-3. **Intégration Transparente** : Assurez-vous que le système permet d'utiliser ExterShip de manière transparente, comme s'il s'agissait d'un transporteur interne.
-
-Placez cette version modifiée dans un dossier nommé **Partie2**.
+Placez cette version modifiée dans un repository nommé **Partie2**.
 
 ---
 
@@ -54,11 +48,11 @@ Pour faciliter l’utilisation du système, les utilisateurs finaux de TransLogi
    - Changer la stratégie de calcul.
 2. **Simplification de l'Interface Utilisateur** : `FacadeExpedition` doit servir de point d’entrée principal pour les utilisateurs de TransLogiCo, masquant la complexité des interactions entre les transporteurs et les stratégies.
 
-Placez cette version finale dans un dossier nommé **Partie3**.
+Placez cette version finale dans un repository nommé **Partie3**.
 
 ---
 
-## Structure des Dossiers
+## Structure des repository
 
 - **Partie1/** : Mise en place initiale du système avec les patterns Factory et Stratégie.
 - **Partie2/** : Extension avec le pattern Adaptateur pour intégrer un transporteur externe.
