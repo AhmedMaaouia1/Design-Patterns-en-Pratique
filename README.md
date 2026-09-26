@@ -50,14 +50,45 @@ Le **pattern Stratégie** permet de définir la manière de calcul des frais, ch
 ## Exemple d’utilisation
 Exemple d’utilisation pour créer un transporteur et calculer les frais d’expédition :
 
-```java
-public class Main {
-    public static void main(String[] args) {
-        // Créer un transporteur de type STANDARD
-        Transporteur transporteur = Transporteur.createTrans(TypeTrans.STANDARD);
+Placez cette version modifiée dans un repository nommé **Partie2**.
 
-        // Calculer les frais d'expédition
-        double frais = transporteur.calculerFrais(10.0, 100.0);
-        System.out.println("Frais d'expédition : " + frais);
-    }
-}
+---
+
+## Partie 3 : Simplification de l'Interface pour les Utilisateurs (Façade)
+
+### Nouvelle Exigence
+
+Pour faciliter l’utilisation du système, les utilisateurs finaux de TransLogiCo demandent une interface simplifiée pour la gestion des transporteurs et des calculs de frais.
+
+### Objectifs
+
+1. **Façade** : Implémenter une classe `FacadeExpedition` pour simplifier l’interaction avec le système. Cette classe devra fournir des méthodes pour :
+   - Ajouter un transporteur (via `TransporteurFactory`).
+   - Calculer les frais d'expédition en utilisant un transporteur spécifique.
+   - Changer la stratégie de calcul.
+2. **Simplification de l'Interface Utilisateur** : `FacadeExpedition` doit servir de point d’entrée principal pour les utilisateurs de TransLogiCo, masquant la complexité des interactions entre les transporteurs et les stratégies.
+
+Placez cette version finale dans un repository nommé **Partie3**.
+
+---
+
+## Structure des repository
+
+- **Partie1/** : Mise en place initiale du système avec les patterns Factory et Stratégie.
+- **Partie2/** : Extension avec le pattern Adaptateur pour intégrer un transporteur externe.
+- **Partie3/** : Ajout du pattern Façade pour simplifier l’interface utilisateur.
+
+---
+
+## Exigences et Objectifs Techniques
+
+1. **Pattern Factory** : Facilite l'instanciation des transporteurs internes de manière centralisée.
+2. **Pattern Stratégie** : Permet de changer dynamiquement le calcul des frais.
+3. **Pattern Adaptateur** : Intègre des transporteurs externes sans modifier la structure existante.
+4. **Pattern Façade** : Fournit une interface simplifiée pour l’utilisateur.
+
+Chaque partie doit démontrer une maîtrise des Design Patterns et respecter les principes de modularité et de flexibilité. Assurez-vous que chaque dossier GitHub contient le code correspondant, bien structuré et documenté.
+
+---
+
+Bonne chance et merci de suivre les évolutions de ce projet ! 🎉
