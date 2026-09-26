@@ -1,34 +1,54 @@
-# Design-Patterns-en-Pratique
-Ce repository contient des implémentations pratiques de divers Design Patterns (patrons de conception), en commençant par la conception et l'intégration progressive de nouvelles fonctionnalités à travers des patterns comme l'Adaptateur, la Méthode de Factory, la Stratégie, la Façade..
+# TransLogiCo - Partie 1 : Modélisation avec le Pattern Factory et le Pattern Stratégie
 
-# TransLogiCo - Système de Calcul de Frais d'Expédition
+## Contexte
+Dans cette première partie, nous mettons en place la base du système d’expédition TransLogiCo pour gérer différents transporteurs et leurs méthodes de calcul des frais. Le design est pensé pour être extensible et flexible, permettant ainsi de facilement ajouter ou modifier des transporteurs et leurs stratégies de calcul.
 
-## Contexte Général
+Pour atteindre cet objectif, nous utilisons **deux patterns de conception** :
+1. **Pattern Factory** pour créer dynamiquement des transporteurs en fonction du type sélectionné.
+2. **Pattern Stratégie** pour permettre de définir et de changer dynamiquement la manière de calcul des frais.
 
-Votre entreprise de logistique, **TransLogiCo**, souhaite optimiser le calcul des frais d’expédition de colis avec un système flexible et évolutif. Le service R&D a décidé d'implémenter une architecture de calcul de frais qui puisse s'adapter aux différents types de transporteurs et stratégies de tarification, tout en permettant d’intégrer facilement des transporteurs externes. Ce projet est structuré en trois parties, correspondant à l'évolution des exigences de l’entreprise.
+## Modélisation
 
----
+### Classes et Interfaces
+Les principales classes et interfaces de cette partie sont :
 
-## Partie 1 : Mise en place du Système de Calcul de Frais d'Expédition (Factory & Stratégie)
+1. **`TypeTrans` (Enum)** :
+   - **Description** : Un `enum` qui définit les types de transporteurs disponibles : `STANDARD`, `EXPRESS`, et `ECO`.
+   - **Raison du choix** : Utiliser un `enum` permet de référencer facilement les types de transporteurs sans erreur, augmentant la lisibilité du code.
 
-### Contexte
+2. **Interface `CalculerFrais`** :
+   - **Description** : Une interface pour les classes de calcul des frais, avec une méthode `calcul(poids, distance)`.
+   - **Raison du choix** : Fournit une base commune pour les stratégies de calcul, permettant de définir plusieurs manières de calcul des frais en gardant le code modulaire.
 
-TransLogiCo démarre avec trois types de transporteurs internes : **Standard**, **Express**, et **Économique**. Chaque transporteur a une méthode spécifique de calcul des frais :
-- **Standard** : 1,5 € par kilomètre + 0,2 € par kilo.
-- **Express** : 2,5 € par kilomètre + 0,5 € par kilo.
-- **Économique (Eco)** : 1 € par kilomètre + 0,1 € par kilo.
+3. **Classes de calcul des frais (`CStandard`, `CExpress`, `CEco`)** :
+   - **Description** : Chaque classe implémente l’interface `CalculerFrais` avec sa propre logique de calcul :
+     - `CStandard` : 1,5 € par km + 0,2 € par kg.
+     - `CExpress` : 2,5 € par km + 0,5 € par kg.
+     - `CEco` : 1 € par km + 0,1 € par kg.
+   - **Raison du choix** : En définissant chaque stratégie de calcul dans une classe, il devient facile de modifier ou d’ajouter de nouvelles stratégies sans impacter les autres parties du code.
 
-Le système doit permettre de définir dynamiquement le calcul des frais de chaque transporteur en utilisant des stratégies différentes.
+4. **Classe abstraite `Transporteur`** :
+   - **Attributs et méthodes** :
+     - `manierCalcul` : Un attribut de type `CalculerFrais` pour la stratégie de calcul actuelle.
+     - `createTrans(TypeTrans type)` : Méthode de création qui renvoie une instance du type de transporteur voulu.
+     - `setCalcul(CalculerFrais calcul)` : Définit la stratégie de calcul des frais.
+     - `calculerFrais(double poids, double distance)` : Calcule les frais avec la stratégie actuelle.
+   - **Raison du choix** : En centralisant les méthodes dans `Transporteur`, on isole la logique de création et de calcul des frais, permettant d’ajouter des transporteurs ou des stratégies de calcul avec un minimum de modifications.
 
-Placez cette première version dans une branche nommée **Partie1**.
+5. **Classes concrètes de transporteurs (`Standard`, `Express`, `Eco`)** :
+   - **Description** : Ces classes héritent de `Transporteur` et définissent leur stratégie de calcul par défaut.
+   - **Raison du choix** : Chaque transporteur est configuré avec sa stratégie de calcul respective dès sa création, facilitant l’ajout de nouveaux transporteurs.
 
----
+## Choix de conception
 
-## Partie 2 : Intégration de Transporteurs Externes (Adaptateur)
+### Utilisation du Pattern Factory
+Le **pattern Factory** est implémenté dans la méthode `createTrans` de la classe `Transporteur`, permettant de créer un transporteur en fonction du type donné (`TypeTrans`). Ce design facilite l’ajout de nouveaux transporteurs sans impact majeur sur la structure.
 
-### Nouvelle Exigence
+### Utilisation du Pattern Stratégie
+Le **pattern Stratégie** permet de définir la manière de calcul des frais, chaque transporteur utilisant une stratégie spécifique définie par `CalculerFrais`. La flexibilité de `setCalcul()` permet de changer de stratégie en temps réel, sans modifier le reste du code.
 
-L’équipe commerciale de TransLogiCo conclut qu’il serait stratégique d’offrir des options de livraison avec des transporteurs externes. L’entreprise souhaite intégrer un transporteur externe nommé **ExterShip**, qui possède une méthode `getTarif(double poids, double distance)` pour calculer les frais.
+## Exemple d’utilisation
+Exemple d’utilisation pour créer un transporteur et calculer les frais d’expédition :
 
 Placez cette version modifiée dans un repository nommé **Partie2**.
 
